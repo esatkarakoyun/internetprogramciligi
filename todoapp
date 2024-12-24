@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card mt-3">
+            <div class="card-header">Todo App</div>
+            <div class="card-body">
+                <form id="taskForm">
+                    <div class="input-group">
+                        <input type="text" id="txtTaskName" class="form-control" placeholder="Görev Ekle">
+                        <button type="submit" class="btn btn-primary">Ekle</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <ul id="task-list" class="list-group"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const gorevListesi = [{"id":1, "gorevAdi":"Görev 1"}, {"id":2, "gorevAdi":"Görev 2"}];
+
+        function displayTasks() {
+            const ul = document.getElementById("task-list");
+            ul.innerHTML = gorevListesi.map(gorev => 
+                `<li class="list-group-item">
+                    <input type="checkbox" id="${gorev.id}"> <label for="${gorev.id}">${gorev.gorevAdi}</label>
+                </li>`
+            ).join('');
+        }
+
+        document.getElementById("taskForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const taskName = document.getElementById("txtTaskName").value.trim();
+            if (taskName) {
+                gorevListesi.push({id: gorevListesi.length + 1, gorevAdi: taskName});
+                document.getElementById("txtTaskName").value = '';
+                displayTasks();
+            }
+        });
+
+        displayTasks();
+    </script>
+</body>
+</html>
