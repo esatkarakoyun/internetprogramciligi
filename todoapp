@@ -13,19 +13,23 @@
             <div class="card-body">
                 <form id="taskForm">
                     <div class="input-group">
-                        <input type="text" id="txtTaskName" class="form-control" placeholder="Görev Ekle">
+                        <input type="text" id="txtTaskName" class="form-control" placeholder="Add a task">
                         <button type="submit" class="btn btn-primary">Ekle</button>
                     </div>
                 </form>
             </div>
             <div class="card-footer">
+                <button id="btnClear" class="btn btn-danger btn-sm float-right mb-3">Temizle</button>
                 <ul id="task-list" class="list-group"></ul>
             </div>
         </div>
     </div>
 
     <script>
-        const gorevListesi = [{"id":1, "gorevAdi":"Görev 1"}, {"id":2, "gorevAdi":"Görev 2"}];
+        let gorevListesi = [
+            {"id": 1, "gorevAdi": "Görev 1"},
+            {"id": 2, "gorevAdi": "Görev 2"}
+        ];
 
         function displayTasks() {
             const ul = document.getElementById("task-list");
@@ -44,6 +48,11 @@
                 document.getElementById("txtTaskName").value = '';
                 displayTasks();
             }
+        });
+
+        document.getElementById("btnClear").addEventListener("click", function() {
+            gorevListesi = [];
+            displayTasks();
         });
 
         displayTasks();
